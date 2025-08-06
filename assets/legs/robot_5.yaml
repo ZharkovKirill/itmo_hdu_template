@@ -1,0 +1,5 @@
+closed_loop: [['Main_connection_1_L5Pseudo', 'Main_connection_1_L4Pseudo'], ['Main_connection_2_L6Pseudo', 'Main_connection_2_L7Pseudo']] 
+type: ['3d', '3d'] 
+name_mot: ['Main_ground', 'branch_1'] 
+joint_name: [] 
+joint_type: [] 
