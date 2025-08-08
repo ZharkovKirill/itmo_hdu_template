@@ -13,6 +13,9 @@ for body1, body2 in combinations:
     if body1.name != surface_name or body2.name != surface_name:
         leg_model.add_exclude(bodyname1=body1.name, bodyname2=body2.name)
 
+leg_model.add_equality(objtype=mujoco.mjtObj.mjOBJ_BODY, name1 = "Main_connection_1_L5Pseudo", name2 = "Main_connection_1_L4Pseudo")
+leg_model.add_equality(objtype=mujoco.mjtObj.mjOBJ_BODY, name1 = "Main_connection_2_L6Pseudo", name2 = "Main_connection_2_L7Pseudo")
+ 
 # Compile the modified model
 mj_model_cheetah = leg_model.compile()
 mj_data_cheetah = mujoco.MjData(mj_model_cheetah)

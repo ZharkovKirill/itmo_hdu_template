@@ -55,7 +55,7 @@ def train_ppo(
     total_timesteps: int = 500000,
     n_envs: int = 4,
     eval_freq: int = 10000,
-    n_eval_episodes: int = 10,
+    n_eval_episodes: int = 2,
     save_freq: int = 50000,
     experiment_name: str = "ppo_halfcheetah",
     seed: int = 42
@@ -89,14 +89,15 @@ def train_ppo(
         train_env = SubprocVecEnv([make_env(xml_file, i, seed, log_dir) for i in range(n_envs)])
     else:
         env = HalfCheetahEnvModidified(xml_file=xml_file)
-        env = TimeLimit(env, max_episode_steps=5000)
+        env = TimeLimit(env, max_episode_steps=500)
         env = Monitor(env, log_dir)
         train_env = DummyVecEnv([lambda: env])
     
     # Create evaluation environment
     eval_env = HalfCheetahEnvModidified(xml_file=xml_file)
+    eval_env.render_mode = "human"
     # Add TimeLimit wrapper to ensure episodes don't run forever
-    eval_env = TimeLimit(eval_env, max_episode_steps=5000)
+    eval_env = TimeLimit(eval_env, max_episode_steps=500)
     
     # Initialize PPO model
     model = PPO(
@@ -207,8 +208,8 @@ if __name__ == "__main__":
     xml_file = "/home/kirill/prj/itmo_hdu_template/assets/half_cheetah_modified.xml"
     total_timesteps = 500000
     n_envs = 4
-    eval_freq = 10000
-    n_eval_episodes = 10
+    eval_freq = 20000
+    n_eval_episodes = 2
     experiment_name = "ppo_halfcheetah"
     seed = 42
     
